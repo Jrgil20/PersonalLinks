@@ -1,0 +1,115 @@
+---
+---
+
+<div class="animated-background">
+  <div class="gradient-bg"></div>
+  <div class="particles">
+    {Array.from({ length: 50 }, (_, i) => (
+      <div class={`particle particle-${i}`}></div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .animated-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+  }
+
+  .gradient-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      135deg,
+      #0f0f23 0%,
+      #1a1a2e 25%,
+      #16213e 50%,
+      #0f3460 75%,
+      #0f0f23 100%
+    );
+    animation: gradientShift 20s ease-in-out infinite;
+  }
+
+  .particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    animation: float 15s infinite linear;
+  }
+
+  .particle:nth-child(odd) {
+    background: rgba(99, 102, 241, 0.4);
+    animation-duration: 20s;
+  }
+
+  .particle:nth-child(3n) {
+    background: rgba(139, 92, 246, 0.3);
+    animation-duration: 25s;
+  }
+
+  @keyframes gradientShift {
+    0%, 100% { 
+      background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #0f0f23 100%);
+    }
+    50% { 
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 25%, #0f3460 50%, #533a7d 75%, #1a1a2e 100%);
+    }
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(100vh) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  /* Generate random positions for particles */
+  .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+  .particle:nth-child(2) { left: 20%; animation-delay: 2s; }
+  .particle:nth-child(3) { left: 30%; animation-delay: 4s; }
+  .particle:nth-child(4) { left: 40%; animation-delay: 6s; }
+  .particle:nth-child(5) { left: 50%; animation-delay: 8s; }
+  .particle:nth-child(6) { left: 60%; animation-delay: 10s; }
+  .particle:nth-child(7) { left: 70%; animation-delay: 12s; }
+  .particle:nth-child(8) { left: 80%; animation-delay: 14s; }
+  .particle:nth-child(9) { left: 90%; animation-delay: 16s; }
+  .particle:nth-child(10) { left: 15%; animation-delay: 18s; }
+  .particle:nth-child(11) { left: 25%; animation-delay: 1s; }
+  .particle:nth-child(12) { left: 35%; animation-delay: 3s; }
+  .particle:nth-child(13) { left: 45%; animation-delay: 5s; }
+  .particle:nth-child(14) { left: 55%; animation-delay: 7s; }
+  .particle:nth-child(15) { left: 65%; animation-delay: 9s; }
+  .particle:nth-child(16) { left: 75%; animation-delay: 11s; }
+  .particle:nth-child(17) { left: 85%; animation-delay: 13s; }
+  .particle:nth-child(18) { left: 95%; animation-delay: 15s; }
+  .particle:nth-child(19) { left: 5%; animation-delay: 17s; }
+  .particle:nth-child(20) { left: 12%; animation-delay: 19s; }
+</style>

@@ -1,0 +1,61 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AnimatedBackground from '../components/AnimatedBackground.astro';
+import ProfileSection from '../components/ProfileSection.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+import Footer from '../components/Footer.astro';
+import { personalInfo } from '../config/personal';
+---
+
+<Layout 
+  title={`${personalInfo.name} - Personal Landing Page`}
+  description={`${personalInfo.name} - ${personalInfo.title}. Connect with me through my social links and professional networks.`}
+>
+  <AnimatedBackground />
+  
+  <main class="main-content">
+    <div class="container">
+      <ProfileSection />
+      <SocialLinks />
+      <Footer />
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .main-content {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      padding: 1rem;
+    }
+  }
+
+  @media (min-height: 800px) {
+    .main-content {
+      justify-content: center;
+    }
+  }
+
+  @media (max-height: 600px) {
+    .main-content {
+      justify-content: flex-start;
+      padding-top: 2rem;
+    }
+  }
+</style>
+</Layout>

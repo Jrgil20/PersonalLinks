@@ -1,0 +1,129 @@
+---
+import { personalInfo } from '../config/personal';
+---
+
+<section class="profile-section">
+  <div class="profile-container">
+    <div class="profile-image-wrapper">
+      <img 
+        src={personalInfo.profileImage} 
+        alt={personalInfo.profileImageAlt}
+        class="profile-image"
+        loading="eager"
+        decoding="async"
+      />
+      <div class="profile-glow"></div>
+    </div>
+    <div class="profile-info">
+      <h1 class="profile-name">{personalInfo.name}</h1>
+      <p class="profile-title">{personalInfo.title}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .profile-section {
+    padding: 2rem 1rem;
+    text-align: center;
+    animation: fadeInUp 1s ease-out;
+  }
+
+  .profile-container {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .profile-image-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 2rem;
+  }
+
+  .profile-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .profile-image:hover {
+    transform: scale(1.05);
+    border-color: rgba(99, 102, 241, 0.5);
+  }
+
+  .profile-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 70%);
+    z-index: 1;
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  .profile-info {
+    animation: fadeInUp 1s ease-out 0.3s both;
+  }
+
+  .profile-name {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .profile-title {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    color: #a1a1aa;
+    margin: 0;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 0.3;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+      opacity: 0.6;
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .profile-section {
+      padding: 1.5rem 1rem;
+    }
+
+    .profile-image {
+      width: 100px;
+      height: 100px;
+    }
+
+    .profile-glow {
+      width: 120px;
+      height: 120px;
+    }
+  }
+</style>
