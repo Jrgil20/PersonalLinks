@@ -24,14 +24,14 @@ export const socialLinks: SocialLink[] = [
   {
     name: "LINKEDIN",
     description: "About me",
-    url: "https://linkedin.com/in/yourprofile",
+    url: "https://www.linkedin.com/in/jesus-r-gil/",
     icon: "linkedin",
     external: true
   },
   {
     name: "MY PERSONAL GITHUB", 
     description: "my projects",
-    url: "https://github.com/yourusername",
+    url: "https://github.com/JesusRgil",
     icon: "github",
     external: true
   },
@@ -45,7 +45,7 @@ export const socialLinks: SocialLink[] = [
   {
     name: "CONTACT ME",
     description: "Telegram",
-    url: "https://t.me/yourusername",
+    url: "https://t.me/Jr_Gil",
     icon: "telegram",
     external: true
   }
