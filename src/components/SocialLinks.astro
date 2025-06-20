@@ -1,5 +1,6 @@
 ---
 import { socialLinks } from '../config/personal';
+import { getIcon } from './icons';
 
 const getIcon = (iconName: string) => {
   const icons = {
@@ -12,7 +13,7 @@ const getIcon = (iconName: string) => {
 };
 ---
 
-<section class="social-links">
+<section class="social-links" aria-label="Enlaces sociales y de contacto">
   <div class="links-container">
     {socialLinks.map((link, index) => (
       <a 
@@ -21,18 +22,23 @@ const getIcon = (iconName: string) => {
         target={link.external ? "_blank" : "_self"}
         rel={link.external ? "noopener noreferrer" : ""}
         style={`animation-delay: ${(index + 1) * 0.2}s`}
+        aria-label={`${link.name}: ${link.description}`}
+        data-link-type={link.icon}
       >
         <div class="link-icon" set:html={getIcon(link.icon)} />
         <div class="link-content">
           <h3 class="link-name">{link.name}</h3>
           <p class="link-description">{link.description}</p>
         </div>
-        <div class="link-arrow">
+        <div class="link-arrow" aria-hidden="true">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
             <polyline points="15,3 21,3 21,9"></polyline>
             <line x1="10" y1="14" x2="21" y2="3"></line>
           </svg>
+        </div>
+        <div class="link-loading" aria-hidden="true">
+          <div class="loading-spinner"></div>
         </div>
       </a>
     ))}
@@ -92,6 +98,11 @@ const getIcon = (iconName: string) => {
       0 0 0 1px rgba(99, 102, 241, 0.1);
   }
 
+  .social-link:focus {
+    outline: 2px solid #6366f1;
+    outline-offset: 2px;
+  }
+
   .link-icon {
     display: flex;
     align-items: center;
@@ -143,6 +154,28 @@ const getIcon = (iconName: string) => {
     opacity: 1;
   }
 
+  .link-loading {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .social-link:active .link-loading {
+    opacity: 1;
+  }
+
+  .loading-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(99, 102, 241, 0.3);
+    border-top: 2px solid #6366f1;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
   @keyframes fadeInUp {
     from {
       opacity: 0;
@@ -152,6 +185,11 @@ const getIcon = (iconName: string) => {
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
   }
 
   @media (max-width: 768px) {
@@ -185,6 +223,28 @@ const getIcon = (iconName: string) => {
 
     .social-link {
       padding: 1rem;
+    }
+  }
+
+  /* Reduce motion para accesibilidad */
+  @media (prefers-reduced-motion: reduce) {
+    .social-link,
+    .link-icon,
+    .link-arrow {
+      animation: none;
+      transition: none;
+    }
+    
+    .social-link:hover {
+      transform: none;
+    }
+    
+    .social-link:hover .link-icon {
+      transform: none;
+    }
+    
+    .social-link:hover .link-arrow {
+      transform: none;
     }
   }
 </style>

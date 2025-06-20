@@ -1,15 +1,43 @@
 {
-  "name": "@example/basics",
+  "name": "jesus-gil-personal-site",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
+  "description": "Personal landing page for Jesús Gil - Engineer and student",
+  "author": "Jesús Gil <fariasjesusrodolfo@gmail.com>",
+  "license": "MIT",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest --coverage",
+    "validate": "tsc --noEmit",
+    "lint": "eslint . --ext .astro,.js,.ts",
+    "format": "prettier --write .",
+    "type-check": "astro check"
   },
   "dependencies": {
     "astro": "^5.2.5"
-  }
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "eslint": "^8.0.0",
+    "eslint-plugin-astro": "^0.29.0",
+    "prettier": "^3.0.0",
+    "prettier-plugin-astro": "^0.12.0",
+    "typescript": "^5.0.0",
+    "vitest": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "astro",
+    "personal-site",
+    "landing-page",
+    "portfolio"
+  ]
 }
