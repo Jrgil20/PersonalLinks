@@ -2,16 +2,25 @@
 export interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  canonicalURL?: string;
 }
 
 const { 
-  title = "Personal Landing Page",
-  description = "Modern minimalist personal landing page built with Astro.js"
+  title = "Jesús Gil - Personal Landing Page",
+  description = "Jesús Gil - Engineer and student. Connect with me through my social links and professional networks.",
+  image = "https://avatars.githubusercontent.com/u/131034722?v=4",
+  canonicalURL = Astro.url.href
 } = Astro.props;
+
+// Metadatos dinámicos
+const siteName = "Jesús Gil";
+const siteUrl = "https://jesusgil.dev"; // Cambiar por tu dominio real
+const twitterHandle = "@JesusRgil";
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
@@ -19,18 +28,56 @@ const {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+    
     <!-- SEO Meta Tags -->
+    <meta name="author" content="Jesús Gil" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#6366f1" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="400" />
+    <meta property="og:image:height" content="400" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content="es_ES" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    <meta name="twitter:creator" content={twitterHandle} />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Jesús Gil",
+      "jobTitle": "Engineer and student",
+      "url": siteUrl,
+      "image": image,
+      "sameAs": [
+        "https://www.linkedin.com/in/jesus-r-gil/",
+        "https://github.com/JesusRgil",
+        "https://t.me/Jr_Gil"
+      ],
+      "email": "fariasjesusrodolfo@gmail.com"
+    })} />
     
     <!-- Preload critical fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- Preload critical image -->
+    <link rel="preload" as="image" href={image} />
     
     <title>{title}</title>
   </head>
@@ -63,6 +110,7 @@ const {
   html {
     font-family: 'Inter', system-ui, sans-serif;
     scroll-behavior: smooth;
+    font-size: 16px;
   }
 
   body {
@@ -72,6 +120,8 @@ const {
     font-size: 16px;
     overflow-x: hidden;
     min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   /* Custom scrollbar */
@@ -120,13 +170,13 @@ const {
 
   /* Responsive typography */
   @media (max-width: 768px) {
-    body {
+    html {
       font-size: 15px;
     }
   }
 
   @media (max-width: 480px) {
-    body {
+    html {
       font-size: 14px;
     }
   }
@@ -139,6 +189,19 @@ const {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
+    }
+    
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    :root {
+      --color-text: #ffffff;
+      --color-text-secondary: #cccccc;
+      --color-surface: rgba(255, 255, 255, 0.1);
     }
   }
 </style>

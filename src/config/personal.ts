@@ -13,11 +13,27 @@ export interface SocialLink {
   external: boolean;
 }
 
+// Validación de URLs
+const isValidUrl = (url: string): boolean => {
+  try {
+    new URL(url);
+    return true;
+  } catch {
+    return false;
+  }
+};
+
+// Validación de email
+const isValidEmail = (email: string): boolean => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
 export const personalInfo: PersonalInfo = {
   name: "JESUS GIL",
   title: "Engineer and student",
-  profileImage: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop&crop=face",
-  profileImageAlt: "Professional headshot"
+  profileImage: "https://avatars.githubusercontent.com/u/131034722?v=4",
+  profileImageAlt: "Jesús Gil - Professional headshot"
 };
 
 export const socialLinks: SocialLink[] = [
@@ -38,7 +54,7 @@ export const socialLinks: SocialLink[] = [
   {
     name: "COLLABORATION",
     description: "Work with me",
-    url: "mailto:your.email@example.com",
+    url: "mailto:fariasjesusrodolfo@gmail.com",
     icon: "collaboration",
     external: true
   },
@@ -50,6 +66,34 @@ export const socialLinks: SocialLink[] = [
     external: true
   }
 ];
+
+// Validación de configuración
+export const validateConfig = (): { isValid: boolean; errors: string[] } => {
+  const errors: string[] = [];
+  
+  // Validar URLs de social links
+  socialLinks.forEach((link, index) => {
+    if (!isValidUrl(link.url)) {
+      errors.push(`Invalid URL in social link ${index + 1}: ${link.url}`);
+    }
+  });
+  
+  // Validar email en colaboración
+  for (const link of socialLinks) {
+    if (link.name === "COLLABORATION" && link.url.indexOf('mailto:') === 0) {
+      const email = link.url.replace('mailto:', '');
+      if (!isValidEmail(email)) {
+        errors.push(`Invalid email in collaboration link: ${email}`);
+      }
+      break;
+    }
+  }
+  
+  return {
+    isValid: errors.length === 0,
+    errors
+  };
+};
 
 export const themeConfig = {
   colors: {
